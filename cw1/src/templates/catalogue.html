@@ -3,20 +3,24 @@
     <table>
      <thead>
         <tr>
-          <th>Cover</>
-          <th>Name</>
-          <th>Author</>
-          <th>Pages</>
+          <th>Cover</th>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Pages</th>
         </tr>
       </thead>
       <tbody>
+          {% for name, author in root.iteritems() %}
           <tr>
-            <td> {{ cover }} </>
-            {% for name, author in root.iteritems() %}
-            <td> {{ name }} </>
-            <td> {{ author }} </>
-            {% endfor %}
+            <td> {{ cover }} </td>
+            <td class = "field title">
+              <div class ="value">
+                <a href="/book/{{ name }}">{{ name }}</a>
+                </div>
+              </td>
+            <td> {{ author }} </td>
           </tr>
+          {% endfor %}
       </tbody>
     </table>
   </body>
