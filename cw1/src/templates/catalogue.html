@@ -10,14 +10,14 @@
         </tr>
       </thead>
       <tbody>
-          {% for name, author in root.iteritems() %}
+          {% for cover, name, author in root %}
           <tr>
-            <td> {{ cover }} </td>
+            <td> <img src"('static', filename=' {{ cover }} ')"> </td>
             <td class = "field title">
               <div class ="value">
                 <a href="/book/{{ name }}">{{ name }}</a>
-                </div>
-              </td>
+              </div>
+            </td>
             <td> {{ author }} </td>
           </tr>
           {% endfor %}
