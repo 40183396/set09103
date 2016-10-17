@@ -12,7 +12,8 @@
       <tbody>
           {% for cover, name, author in root %}
           <tr>
-            <td> <img src"('static', filename=' {{ cover }} ')"> </td>
+            <td> <img src="static/{{ cover }}" alt={{
+            name }} width="120" height="90" /> </td>
             <td class = "field title">
               <div class ="value">
                 <a href="/book/{{ name }}">{{ name }}</a>
