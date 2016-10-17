@@ -1,0 +1,21 @@
+<!doctype html>
+  <body>
+    <table id="example" class="display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Cover</>
+          <th>Name</>
+          <th>Author</>
+          <th>Pages</>
+        </tr>
+      <tfoot>
+      <thead>
+        {% for name, author  in root.iteritems() %}
+          <tr>
+            <th> {{ name }} </th>
+            <th> {{ author }} </th>
+          </tr>
+          {% endfor %}
+      <tfoot>
+  </body>
+</html>
