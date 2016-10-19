@@ -13,28 +13,46 @@
 {% block content %}
     
     <table>
+     
      <thead>
-        <tr>
+       
+       <tr>
+          
           <th>Cover</th>
+          
           <th>Name</th>
+          
           <th>Author</th>
+          
           <th>Pages</th>
-        </tr>
+       
+       </tr>
+
       </thead>
+     
       <tbody>
+          
           {% for cover, name, author in root %}
+          
           <tr>
+          
             <td> <img src="static/{{ cover }}" alt={{
             name }} width="120" height="100" /> </td>
+            
             <td class = "field title">
               <div class ="value">
-                <a href="/book/{{ name }}">{{ name }}</a>
+               <a href="/book/{{ name }}">{{ name }}</a>
               </div>
             </td>
+            
             <td> {{ author }} </td>
+          
           </tr>
+          
           {% endfor %}
-      </tbody>
+     
+     </tbody>
+    
     </table>
 
 {% endblock %}
