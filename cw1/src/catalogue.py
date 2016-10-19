@@ -8,5 +8,6 @@ def root():
     ['Catch22.jpg','Catch-22','Joseph Heller']]
     return render_template('catalogue.html', root = dict)
 
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

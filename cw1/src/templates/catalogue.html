@@ -1,5 +1,17 @@
-<!doctype html>
-  <body>
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+<!-- Header -->
+{% block header %}
+
+  <h1>My Book List</h1>
+
+{% endblock %}
+
+<!-- Content -->
+{% block content %}
+    
     <table>
      <thead>
         <tr>
@@ -24,6 +36,5 @@
           {% endfor %}
       </tbody>
     </table>
-  </body>
 
-</html>
+{% endblock %}
