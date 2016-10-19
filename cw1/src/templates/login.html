@@ -1,9 +1,30 @@
-<html>
-  <body>
-      <form action = "http://localhost:5000/login" method = "post">
-        <p>Enter Name:</p>
-        <p><input type = "text" name = "nm" /></p>
-        <p><input type = "submit" value = "submit" /></p>
-      </form>
-    </body>
-</html>
+# code borrowed from
+# https://realpython.com/blog/python/introduction-to-flask-part-2-creating-a-login-page/
+
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+<!-- Header -->
+{% block header %}
+
+  <h1>My Book List</h1>
+  <h2>Login Page</h2>
+
+{% endblock %}
+
+<!-- Content -->
+{% block content %}
+    <h1>Please login</h1>
+    <br>
+    <form action="" method="post">
+      <input type="text" placeholder="Username" name="username" value="{{
+      request.form.username }}">
+      <input type="password" placeholder="Password" name="password" value="{{
+      request.form.password }}">
+      <input class="btn btn-default" type="submit" value="Login">
+    </form>
+    {% if error %}
+      <p class="error"><strong>Error:</strong> {{ error }}
+    {% endif %}
+{% endblock %}
