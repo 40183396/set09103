@@ -1,9 +1,13 @@
 from flask import Flask
-
 from flask import Flask, flash, session, redirect, url_for, abort, request, render_template
 import os
 
 app = Flask(__name__)
+
+dict =[['EastOfEden.jpg','East Of Eden','John Steinbeck'],
+        ['ForWhomTheBellTolls.jpg','For Whom The Bell Tolls','Ernest Hemingway'],
+        ['Catch22.jpg','Catch-22','Joseph Heller'],
+        ['TheGrapesOfWrath.jpg', 'The Grapes of Wrath', 'John Steinbeck']]
 
 # route for catalogue of books
 @app.route('/')
@@ -11,15 +15,14 @@ def home():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        dict =[['EastOfEden.jpg','East Of Eden','John Steinbeck'],
-        ['ForWhomTheBellTolls.jpg','For Whom The Bell Tolls','Ernest Hemingway'],
-        ['Catch22.jpg','Catch-22','Joseph Heller'],
-        ['TheGrapesOfWrath.jpg', 'The Grapes of Wrath', 'John Steinbeck']]
         return render_template('catalogue.html', root = dict)
 
-# route for log in
-#https://realpython.com/blog/python/introduction-to-flask-part-2-creating-a-login-page/
+@app.route('/book/')
+@app.route('/book/<name>')
+def book(name=None):
+    return render_template('book.html', name=name)
 
+# route for log in
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.form['username'] == 'admin' or request.form['password'] =='admin': 
