@@ -1,8 +1,29 @@
 #content
 {
-      float: right;
       width: 500px;
       padding: 20px 0;
       margin: 0 0 0 20px;
 
 }
+
+body {
+font-family: 'Open Sans', sans-serif;    
+font-weight: 300;
+line-height: 1.42em;
+color:#A7A1AE;
+background-color:#F4F1EA;
+}
+
+.login {
+margin: 20px auto;
+width: 300px;
+background-color: #4CAF50;
+color: white;
+}
+.loginScreen {
+background-color: #FFF;
+padding: 20px;
+border-radius: 5px
+}
+
+
