@@ -4,10 +4,13 @@ import os
 
 app = Flask(__name__)
 
-dict =[['EastOfEden.jpg','East Of Eden','John Steinbeck'],
+books =[['EastOfEden.jpg','East Of Eden','John Steinbeck'],
         ['ForWhomTheBellTolls.jpg','For Whom The Bell Tolls','Ernest Hemingway'],
         ['Catch22.jpg','Catch-22','Joseph Heller'],
         ['TheGrapesOfWrath.jpg', 'The Grapes of Wrath', 'John Steinbeck']]
+
+test = [['testCover', 'testName', 'testAuthor']]
+eden = [['EastOfEden.jpg','East Of Eden','John Steinbeck']]
 
 # route for catalogue of books
 @app.route('/')
@@ -15,13 +18,15 @@ def home():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return render_template('catalogue.html', root = dict)
+        return render_template('catalogue.html', root = books)
 
 @app.route('/book/')
 @app.route('/book/<name>')
-def book(name=None):
-    return render_template('book.html', name=name)
-
+def book(name):
+    if name == "East Of Eden":
+          return render_template('book.html', name=name, root = eden)
+    else:
+          return render_template('book.html', name=name, root=test)
 # route for log in
 @app.route('/login', methods=['GET', 'POST'])
 def login():

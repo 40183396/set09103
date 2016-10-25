@@ -1,20 +1,25 @@
-{% extends "layout.html" %}
+<!doctype html>
+<html>
 
-{% block title %} hi  {% endblock %}
-<!-- Header -->
-{% block header %}
-    <h1>{{ name }} </h1>
-{% endblock %}
+  <!-- Head -->
+  <head>
+    {% block head %}
 
+      <link rel="stylesheet" href="/static/css/style.css">
+      {% if name %}
+      <title>Book | {% block name %}{{ name }}{% endblock %}</title>
+      {% else %}
+      <title>Book | None Selected</title>
+      {% endif %}
+    
+    {% endblock %}
 
-<!-- Content -->
-{% block content %}
-    <h2>{{ name }} </h2>
-    {% for cover, bookName, author in dict %}
-    <table>
-      <tr>
-          <td>{{ author }} </td>
-      </tr>
-    </table>
+  </head>
+  <!-- Body -->
+  <body>
+    {% for cover, title, author in root %}
+      <h1>testing {{ author }} </h1>
     {% endfor %}
-{% endblock %}
+   </body>
+
+</html>
