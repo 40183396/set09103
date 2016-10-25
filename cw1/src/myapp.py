@@ -4,13 +4,16 @@ import os
 
 app = Flask(__name__)
 
-books =[['EastOfEden.jpg','East Of Eden','John Steinbeck'],
+books =[['EastOfEden.jpg','East of Eden','John Steinbeck'],
         ['ForWhomTheBellTolls.jpg','For Whom The Bell Tolls','Ernest Hemingway'],
         ['Catch22.jpg','Catch-22','Joseph Heller'],
         ['TheGrapesOfWrath.jpg', 'The Grapes of Wrath', 'John Steinbeck']]
 
 test = [['testCover', 'testName', 'testAuthor']]
 eden = [['EastOfEden.jpg','East Of Eden','John Steinbeck']]
+bell = [['ForWhomTheBellTolls.jpg','For Whom The Bell Tolls','Ernest Hemingway']]
+catch = [['Catch22.jpg','Catch-22','Joseph Heller']]
+grape = [['TheGrapesOfWrath.jpg', 'The Grapes of Wrath', 'John Steinbeck']]
 
 # route for catalogue of books
 @app.route('/')
@@ -23,8 +26,17 @@ def home():
 @app.route('/book/')
 @app.route('/book/<name>')
 def book(name):
-    if name == "East Of Eden":
+    if name == "East of Eden":
           return render_template('book.html', name=name, root = eden)
+    if name == "For Whom The Bell Tolls":
+          return render_template('book.html', name=name, root = bell)
+    if name == "Catch-22":
+          return render_template('book.html', name=name, root = catch)
+    if name == "The Grapes of Wrath":
+          return render_template('book.html', name=name, root = grape)
+
+
+
     else:
           return render_template('book.html', name=name, root=test)
 # route for log in
