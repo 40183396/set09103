@@ -17,9 +17,61 @@
   </head>
   <!-- Body -->
   <body>
+  
     {% for cover, title, author in root %}
       <h1>testing {{ author }} </h1>
+    
+    
+    <!-- Page Container -->
+    <div class ="container content margin-top" style="max-width:1400px;">
+      
+      <!-- the Grid -->
+        <div class = "row-padding" style="margin:0 -16px">
+          
+          <!-- Left Column -->
+          <div class = "third">
+            
+            <div class="white text-grey card-4">
+              
+              <div class = "display-container">
+                <img src="/static/{{ cover }}" alt= {{ name }}/>
+                <div class="display-bottomleft container text-black">
+                  <h2>{{ title }}</h2>
+                </div>
+              </div>
+
+              <div class="container">
+                <p>{{ author }}</p>
+              </div>
+            
+            </div>
+
+          <!-- End Left Column -->
+          </div>
+
+          <!-- Right Column -->
+          <div class="twothird">
+
+            <div class="container card-2 white margin-bottom">
+              
+              <h2 class = "text-grey padding-16">About</h2>
+              <div class="container">
+                <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur
+                vel in deserunt aspernatur est reprehenderit sunt hic. Nulla
+                tempora soluta ea et odio, unde doloremque repellendus iure,
+                iste.</p>
+                 <hr>
+              </div>
+              
+            </div>
+          <!-- End Right Column -->  
+          </div>
+        <!-- End Grid -->
+        </div>
+    <!-- End Page Container -->
+    </div>
+
     {% endfor %}
-   </body>
+  </body>
 
 </html>
