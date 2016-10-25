@@ -35,18 +35,26 @@ def book(name):
     if name == "The Grapes of Wrath":
           return render_template('book.html', name=name, root = grape)
 
-
-
     else:
           return render_template('book.html', name=name, root=test)
+
 # route for log in
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if session.get('logged_in'):
+        return redirect(url_for('home'))
     if request.form['username'] == 'admin' or request.form['password'] =='admin': 
         session['logged_in'] = True
+        return redirect(url_for('home'))
     else:
         flash('wrong password')
     return home()
+
+# redirect for logout
+@app.route('/logout')
+def logout():
+    session['logged_in'] = False
+    return redirect(url_for('login'))
 
 # redirect for 404
 @app.errorhandler(404)
