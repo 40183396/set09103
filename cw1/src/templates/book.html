@@ -17,11 +17,9 @@
   </head>
   <!-- Body -->
   <body>
-  
-    {% for cover, title, author in root %}
-      <h1>testing {{ author }} </h1>
-    
-    
+    <a href="/" title="Back to the Home page"><b>HOME</b></a>
+    <a href="/logout" title="Logout"><b>LOGOUT</b></a>
+    {% for cover, title, author, pages, genre in root %}
     <!-- Page Container -->
     <div class ="container content margin-top" style="max-width:1400px;">
       
@@ -35,13 +33,15 @@
               
               <div class = "display-container">
                 <img src="/static/{{ cover }}" alt= {{ name }}/>
-                <div class="display-bottomleft container text-black">
-                  <h2>{{ title }}</h2>
+                <div class="display-bottomright container text-black">
+                  <h1>{{ title }}</h1>
                 </div>
               </div>
 
               <div class="container">
-                <p>{{ author }}</p>
+                <p>by {{ author }}</p>
+                <p>{{ pages }} pages</p>
+                <p>{{ genre }}</p>
               </div>
             
             </div>
@@ -56,10 +56,169 @@
               
               <h2 class = "text-grey padding-16">About</h2>
               <div class="container">
-                <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur
-                vel in deserunt aspernatur est reprehenderit sunt hic. Nulla
-                tempora soluta ea et odio, unde doloremque repellendus iure,
-                iste.</p>
+                {% if title == "East of Eden" %}
+                <p>Set in the rich farmland of California’s Salinas Valley,
+                this sprawling and often brutal novel follows the intertwined
+                destinies of two families—the Trasks and the
+                Hamiltons—whose generations helplessly reenact the fall of
+                Adam and Eve and the poisonous rivalry of Cain and Abel. Here
+                Steinbeck created some of his most memorable characters and
+                explored his most enduring themes: the mystery of identity; the
+                inexplicability of love; and the murderous consequences of
+                love’s absence.</p>
+                {% endif %}
+
+                {% if title == "The Grapes of Wrath" %}
+                <p>First published in 1939, Steinbeck’s Pulitzer Prize
+                winning epic of the Great Depression chronicles the Dust Bowl
+                migration of the 1930s and tells the story of one Oklahoma farm
+                family, the Joads, driven from their homestead and forced to
+                travel west to the promised land of California. Out of their
+                trials and their repeated collisions against the hard realities
+                of an America divided into haves and have-nots evolves a drama
+                that is intensely human yet majestic in its scale and moral
+                vision, elemental yet plainspoken, tragic but ultimately
+                stirring in its human dignity.
+
+                A portrait of the conflict between the powerful and the
+                powerless, of one man’s fierce reaction to injustice, and
+                of one woman’s stoical strength, the novel captures the
+                horrors of the Great Depression and probes the very nature of
+                equality and justice in America.
+
+                Sensitive to fascist and communist criticism, Steinbeck
+                insisted that "The Battle Hymn of the Republic” be printed
+                in its entirety in the first edition of the book—which
+                takes its title from the first verse: He is trampling out the
+                vintage where the grapes of wrath are stored.” As Don
+                DeLillo has claimed, Steinbeck shaped a geography of
+                conscience” with this novel where there is something at
+                stake in every sentence.” Beyond that—for emotional
+                urgency, evocative power, sustained impact, prophetic reach,
+                and continued controversy—The Grapes of Wrath is perhaps
+                the most American of American classics.</p>
+                {% endif %}
+
+
+                {% if title == "For Whom The Bell Tolls" %}
+                <p>In 1937 Ernest Hemingway traveled to Spain to cover the
+                civil war there for the North American Newspaper Alliance.
+                Three years later he completed the greatest novel to emerge
+                from "the good fight", For Whom the Bell Tolls. 
+
+                The story of Robert Jordan, a young American in the
+                International Brigades attached to an antifascist guerilla unit
+                in the mountains of Spain, it tells of loyalty and courage,
+                love and defeat, and the tragic death of an ideal. In his
+                portrayal of Jordan's love for the beautiful Maria and his
+                superb account of El Sordo's last stand, in his brilliant
+                travesty of La Pasionaria and his unwillingness to believe in
+                blind faith, Hemingway surpasses his achievement in The Sun
+                Also Rises and A Farewell to Arms to create a work at once rare
+                and beautiful, strong and brutal, compassionate, moving and
+                wise. 
+
+                "If the function of a writer is to reveal reality," Maxwell
+                Perkins wrote to Hemingway after reading the manuscript, "no
+                one ever so completely performed it." Greater in power, broader
+                in scope, and more intensely emotional than any of the author's
+                previous works, it stands as one of the best war novels of all
+                time.</p>
+                {% endif %}
+
+                {% if title == "Catch-22" %}
+                <p>At the heart of Catch-22 resides the incomparable,
+                malingering bombardier, Yossarian, a hero endlessly inventive
+                in his schemes to save his skin from the horrible chances of
+                war.
+
+                His problem is Colonel Cathcart, who keeps raising the number
+                of missions the men must fly to complete their service. Yet if
+                Yossarian makes any attempts to excuse himself from the
+                perilous missions that he's committed to flying, he's trapped
+                by the Great Loyalty Oath Crusade, the bureaucratic rule from
+                which the book takes its title: a man is considered insane if
+                he willingly continues to fly dangerous combat missions, but if
+                he makes the necessary formal request to be relieved of such
+                missions, the very act of making the request proves that he's
+                sane and therefore, ineligible to be relieved.</p>
+                {% endif %}
+
+                {% if title=="The Count of Monte Cristo" %}
+                <p>'On what slender threads do life and fortune hang'
+
+                Thrown in prison for a crime he has not committed, Edmond
+                Dantès is confined to the grim fortress of If. There he learns
+                of a great hoard of treasure hidden on the Isle of Monte Cristo
+                and he becomes determined not only to escape, but also to
+                unearth the treasure and use it to plot the destruction of the
+                three men responsible for his incarceration. Dumas' epic tale
+                of suffering and retribution, inspired by a real-life case of
+                wrongful imprisonment, was a huge popular success when it was
+                first serialised in the 1840s.
+
+                Robin Buss' lively translation is complete and unabridged, and
+                remains faithful to the style of Dumas' original. This edition
+                includes an introduction, explanatory notes and suggestions for
+                further reading. </p>
+                {% endif %}
+
+                {% if title =="The Martian" %}
+                <p>A mission to Mars.
+                A freak accident.
+                One man's struggle to survive.
+
+                Six days ago, astronaut Mark Watney became one of the first
+                people to walk on Mars. 
+
+                Now, he's sure he'll be the first person to die there.
+
+                After a dust storm nearly kills him and forces his crew to
+                evacuate the planet while thinking him dead, Mark finds himself
+                stranded on Mars' surface, completely alone, with no way to
+                signal Earth that he’s alive. And even if he could get word
+                out, his supplies would be gone years before a rescue could
+                arrive.
+
+                Chances are, though, Mark won't have time to starve to death.
+                The damaged machinery, unforgiving environment or plain-old
+                "human error" are much more likely to kill him first. 
+
+                But Mark's not ready to quit. Armed with nothing but his
+                ingenuity and his engineering skills—and a gallows sense of
+                humor that proves to be his greatest source of strength–he
+                embarks on a dogged quest to stay alive, using his botany
+                expertise to grow food and even hatching a mad plan to contact
+                NASA back on Earth.
+
+                As he overcomes one seemingly insurmountable obstacle after the
+                next, Mark begins to let himself believe he might make it off
+                the planet alive.
+
+                But Mars has plenty of surprises in store for him yet.</p>
+                {% endif %}
+
+                {% if title =="The Great Gatsby" %}
+                <p>THE GREAT GATSBY, F. Scott Fitzgerald’s third book,
+                stands as the supreme achievement of his career. This exemplary
+                novel of the Jazz Age has been acclaimed by generations of
+                readers. The story of the fabulously wealthy Jay Gatsby and his
+                love for the beautiful Daisy Buchanan, of lavish parties on
+                Long Island at a time when The New York Times noted “gin
+                was the national drink and sex the national obsession,” it
+                is an exquisitely crafted tale of America in the 1920s.
+
+                The Great Gatsby is one of the great classics of
+                twentieth-century literature. </p>
+                {% endif %}
+
+                {% if title == "The Stranger" %}
+                <p>Through the story of an ordinary man unwittingly drawn into
+                a senseless murder on an Algerian beach, Camus explored what he
+                termed "the nakedness of man faced with the absurd." First
+                published in English in 1946; now in a new translation by
+                Matthew Ward.</p>
+                {% endif %}
                  <hr>
               </div>
               

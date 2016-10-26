@@ -4,16 +4,26 @@ import os
 
 app = Flask(__name__)
 
-books =[['EastOfEden.jpg','East of Eden','John Steinbeck'],
-        ['ForWhomTheBellTolls.jpg','For Whom The Bell Tolls','Ernest Hemingway'],
-        ['Catch22.jpg','Catch-22','Joseph Heller'],
-        ['TheGrapesOfWrath.jpg', 'The Grapes of Wrath', 'John Steinbeck']]
+books =[['EastOfEden.jpg','East of Eden','John Steinbeck','601','Classics'],
+        ['ForWhomTheBellTolls.jpg','For Whom The Bell Tolls','Ernest Hemingway','480','Classics'],
+        ['Catch22.jpg','Catch-22','Joseph Heller','453','Classics'],
+        ['TheGrapesOfWrath.jpg', 'The Grapes of Wrath', 'John Steinbeck','479','Classics'],
+        ['TheMartian.jpg', 'The Martian', 'Andy Weir', '369', 'Science Fiction'],
+        ['TheCountOfMonteCristo.jpg', 'The Count of Monte Cristo', 'Alexandre Dumas','1276','Classics'],
+        ['TheStranger.jpg', 'The Stranger', 'Albert Camus', '123', 'Philosophy'],
+        ['TheGreatGatsby.jpg', 'The Great Gatsby', 'F. Scott Fitzgerald','180', 'Classics'],
+        ]
 
 test = [['testCover', 'testName', 'testAuthor']]
-eden = [['EastOfEden.jpg','East Of Eden','John Steinbeck']]
-bell = [['ForWhomTheBellTolls.jpg','For Whom The Bell Tolls','Ernest Hemingway']]
-catch = [['Catch22.jpg','Catch-22','Joseph Heller']]
-grape = [['TheGrapesOfWrath.jpg', 'The Grapes of Wrath', 'John Steinbeck']]
+eden  = [['EastOfEden.jpg','East of Eden','John Steinbeck','601','Classics']]
+bell =  [['ForWhomTheBellTolls.jpg','For Whom The Bell Tolls','Ernest Hemingway','480','Classics']]
+catch = [['Catch22.jpg','Catch-22','Joseph Heller','453','Classics']]
+grape = [['TheGrapesOfWrath.jpg', 'The Grapes of Wrath', 'John Steinbeck','479','Classics']]
+martian = [['TheMartian.jpg', 'The Martian', 'Andy Weir', '369', 'Science Fiction']]
+cristo = [['TheCountOfMonteCristo.jpg', 'The Count of Monte Cristo', 'Alexandre Dumas','1276','Classics']]
+stranger = [['TheStranger.jpg', 'The Stranger', 'Albert Camus', '123','Philosophy']]
+gatsby  = [['TheGreatGatsby.jpg', 'The Great Gatsby', 'F. Scott Fitzgerald','180', 'Classics']]
+        
 
 # route for catalogue of books
 @app.route('/')
@@ -34,6 +44,14 @@ def book(name):
           return render_template('book.html', name=name, root = catch)
     if name == "The Grapes of Wrath":
           return render_template('book.html', name=name, root = grape)
+    if name == "The Martian":
+          return render_template('book.html', name=name, root = martian)
+    if name == "The Count of Monte Cristo":
+          return render_template('book.html', name=name, root = cristo)
+    if name == "The Stranger":
+          return render_template('book.html', name=name, root = stranger)
+    if name == "The Great Gatsby":
+          return render_template('book.html', name=name, root = gatsby)
 
     else:
           return render_template('book.html', name=name, root=test)
@@ -54,7 +72,7 @@ def login():
 @app.route('/logout')
 def logout():
     session['logged_in'] = False
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
 # redirect for 404
 @app.errorhandler(404)
