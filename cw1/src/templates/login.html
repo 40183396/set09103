@@ -6,7 +6,6 @@
 {% block header %}
 
   <h1>My Book List</h1>
-  <h2>Login Page</h2>
 
 {% endblock %}
 
@@ -22,7 +21,9 @@
 
                         <div class="loginForm">
                                 <div class="controlGroup">
-                                 <input type="text" class="login-field" placeholder="Username" name="username" value="{{
+                                
+                                <h2>Login Page</h2>
+                                <input type="text" class="login-field" placeholder="Username" name="username" value="{{
                                    request.form.username }}">
                                   </div>
 
@@ -31,6 +32,7 @@
                                    request.form.password }}">
                                    </div>
                           <input type="submit" input class="btn btn-primary btn-large btn-block" type="submit" value="Login">
+                          <p>user="admin" password="password"</p>
                           </div>
                       </div>
               </div>
