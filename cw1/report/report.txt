@@ -1,0 +1,136 @@
+SET09103 Coursework 1
+
+
+40183396
+
+
+Introduction
+
+
+The aim of this coursework was to create a prototype for an online catalogue web application. The purpose was to demonstrate both the ability to deploy a Python web-app, as well as show skill in a text based Linux server setup. It was assumed the app could be used by anyone not familiar to the language. 
+
+
+The catalogue was designed on a reading list of books. It displays the books in a table format with each row providing a link to more information on the book itself. The web-app was designed with three pages in mind. A login page, the catalogue itself, and a book page for each individual book. 
+
+
+The project itself was fun ordeal. Parts that were difficult were trying to get templates for each individual page to work, and getting them to display each book’s information correctly. Most of the problems were solved by researching and coming across suitable solutions on ‘Stackoverflow’, as well as tutorials on using Flask itself.
+
+
+From this coursework a lot of new features were learnt. It expanded upon the known CSS and HTML by adding the use of the scripting language Python. It also showed how to use loops effectively in apps using the language Jinja.
+
+
+The purpose of this report is to give a background on how the app was designed. It is also to provide critical evaluation on how it functions and looks. There is a part on any enhancements that could have been added. And finally a personal evaluation describing what was learnt, what challenges were met, and how they were overcome.
+
+
+
+
+Design
+
+
+The app is stored in the ‘src’ folder. The python app is run from here. In the ‘src’ folder there are the ‘templates’ and ‘static’ folders.
+
+
+The website has a login page, a catalogue page, and a page loadout for each book. It has templates for the layout of the login and catalogue page. It also has a template for the book page. This means each book will display its information from the one HTML file. There are image files and css stored in the apps ‘static’ folder. This displays each page correctly, and allows the use of book covers to be displayed in the app.
+
+
+The app is designed so it can be run with the command ‘python myapp.py’ and the user can then load the site ‘http://localhost:5000’ on their browser. From here the login page loads up and the user enters ‘admin’ and ‘password’ for the username and password respectively. This page was added to highlight the understanding of using requests in the app.
+
+
+From here the catalogue home page loads up. The design is in a table format with each row displaying a different book and its details. This was to show a reading list type design. Each book title can be clicked on to display another page which displays more information about the particular book. 
+
+
+The design for this was inspired from the website ‘Goodreads’. The app was to display a collection of books in a reading list, and information about each book.
+
+
+Enhancements
+
+
+The app is a simple display of books. However if it were to be improved on the feature which would be most important is the how the information of the books is stored. It would be more efficient to store the information on an SQL database. This would make it a lot easier to manage the collection if it were to expand to much bigger levels.
+
+
+Right now the information is stored in tables in the python file. This is good for a small app, but this means that there is a lot information about each book which cannot be stored. This is because the python file itself would become messy and difficult to manage.
+
+
+It would be good to add an information about the synopsis of the book. Again this wasn’t added due to trying to keep the python file tidy.
+
+
+Another feature which could be added is the ability to edit the catalogue. The ability to add and remove books as well as add information to each book would make the app way more usable as a reading list.
+ 
+Critical Evaluation
+
+
+The app itself is reasonably simple. There could have been several things added in future to actually make it a much more usable prototype. With showing what has been learnt in the module so far it gives a good show of that. However compared to the more mainstream sites such as ‘Goodreads’ the site is lacking. The addition of more information of the books would have made the app really good.
+
+
+The features that could have been added have already been mentioned in the enhancements paragraph. Overall though the site is pretty good for a simple prototype.
+
+
+Personal Evaluation
+
+
+The app itself does demonstrate what has been learned in the module so far. It shows the use of requests by the use of a login page. This displays knowledge of how to use the ‘GET’ and ‘POST’ methods. It also shows the use of redirects as the login page then takes the user to the catalogue page when logged in. 
+
+
+The use of static files and templates has been shown through the use of images, CSS files and HTML files. And also the use of routing and understanding responses. This has shown a great deal of knowledge learned and applied from this module.
+
+
+The project also brought up challenges. In one particular instance the image files were not displaying correctly on each web page, and the book pages were not having information passed to them. This meant having to research the ‘Jinja’ language a bit more. The use of the for loop then fixed this.
+
+
+Also it was quite difficult to get the login page to work correctly. The page would throw up errors meaning the ‘POST’ was not working correctly. It would also not redirect correctly to the home page of the app. This meant having to read several tutorials on Flask, and creating test apps to finally figure out what the problems were.
+
+
+Summary
+
+
+HTML.py - a Python module to easily generate HTML tables and lists. Retrieved from
+https://www.decalage.info/python/html
+
+
+Grinberg, M. (2012, July 16) The Flask Mega Tutorial, Part VI: Profile Page And Avatars. Retrieved from https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-vi-profile-page-and-avatars
+
+
+Grinberg, M. (2012, June 9) The Flask Mega Tutorial, Part V: Profile User Logins. Retrieved from 
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-v-user-logins
+
+
+W3.css Templates. Retrieved from
+http://www.w3schools.com/w3css/w3css_templates.asp
+
+
+Egil, J. and Refsnes, B. w3schools css. Retrieved from
+http://www.w3schools.com/lib/w3.css
+
+
+For Whom The Bell Tolls. Retrieved from
+https://www.goodreads.com/book/show/46170.For_Whom_the_Bell_Tolls
+
+
+East of Eden. Retrieved from
+https://www.goodreads.com/book/show/4406.East_of_Eden
+
+
+The Grapes of Wrath. Retrieved from
+https://www.goodreads.com/book/show/18114322-the-grapes-of-wrath
+
+
+Catch-22. Retrieved from
+https://www.goodreads.com/book/show/168668.Catch_22
+
+
+The Count of Monte Cristo. Retrieved from
+https://www.goodreads.com/book/show/7126.The_Count_of_Monte_Cristo
+
+
+The Martian. Retrieved from
+https://www.goodreads.com/book/show/18007564-the-martian
+
+
+The Great Gatsby. Retrieved from
+https://www.goodreads.com/book/show/4671.The_Great_Gatsby
+
+
+The Stranger. Retrieved from
+https://www.goodreads.com/book/show/49552.The_Stranger
+
+
