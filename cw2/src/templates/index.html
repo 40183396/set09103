@@ -1,18 +1,12 @@
-<html>
-  <head>
-    {% if title %}
-    <title>{{ title }} - MohsBook</title>
-    {% else %}
-    <title>Welcome to MohsBook</title>
-    {% endif %}
-  </head>
-  <body>
-  {% extends "base.html" %}
+{% extends "base.html" %}
   {% block content %}
-    <h1>Hi, {{ user.nickname }}!</h1>
+    <h1>Hi, Welcome to MohsBook!</h1>
+    <br>
+    <p>Click <a href="/logout">here</a> to logout</p>
+    <br><br>
+
     {% for post in posts %}
-    <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
+      <strong>Title:</strong> {{ post.title }} <br>
+      <strong>Post:</strong> {{ post.descr }} <br>
     {% endfor %}
   {% endblock %}
-  </body>
-</html>

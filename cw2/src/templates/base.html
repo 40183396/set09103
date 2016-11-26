@@ -1,5 +1,8 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
     {% if title %}
     <title>{{ title }} - MohsBook</title>
     {% else %}
@@ -7,17 +10,24 @@
     {% endif %}
   </head>
   <body>
-    <div>MohsBook: <a href="/index">Home</a></div>
+  <div class = "container">
+    <div>MohsBook: <a href="/welcome">Home</a></div>
     <hr>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
+    <!-- errors -->
+    {% if error %}
+      <p class="error"><strong>Error:</strong> {{ error }} </p>
+    {% endif %}
+    <!-- msgs -->
+    {% with msgs = get_flashed_messages() %}
+      {% if msgs %}
         <ul>
-        {% for message in messages %}
-          <li>{{ message }} </li>
+        {% for msg in msgs %}
+          <li>{{ msg }} </li>
         {% endfor %}
         </ul>
       {% endif %}
     {% endwith %}
+    <!-- child template -->
     {% block content %}{% endblock %}
   </body>
 </html>
