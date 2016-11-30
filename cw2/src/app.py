@@ -99,6 +99,21 @@ def load_user(id):
 #def connect_db():
  #   return sqlite3.connect(app.database)
 
+@app.route('/register/', methods=['GET', 'POST'])
+def register():
+    register_form = RegisterForm()
+    if register_form.vaildate_on_submit():
+        user = User(
+            name=form.username.data,
+            email=form.email.data,
+            password=form.password.data
+        )
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+        return redirect(url_for('welcome'))
+    return render_template('register.html', form=form)
+
 @app.route('/user/<name>')
 @login_required
 def user(name):
