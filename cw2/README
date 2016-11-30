@@ -1,0 +1,3 @@
+Run the app with 'python app.py'
+
+The app uses extensions SQLAlchemy, Flask-SQLAlchemy, Flask-Bcrypt, Flask-Migrate, Flask-Login
