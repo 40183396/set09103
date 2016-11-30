@@ -1,3 +1,13 @@
 Run the app with 'python app.py'
 
+Please ensure databases are created with database_create_users.py and db_create.py
+
+manage.py handles database migrations. If this needs to be initialised use the commands
+
+python manage.py db init
+
+python manage.py db migrate
+
+python manage.py db upgrade
+
 The app uses extensions SQLAlchemy, Flask-SQLAlchemy, Flask-Bcrypt, Flask-Migrate, Flask-Login
