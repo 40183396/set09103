@@ -14,15 +14,15 @@ class WallPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
-    author_id = db.Column(db.Integer, ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, ForeignKey('users.id'))
 
-    def __init__(self, title, description, author_id):
+    def __init__(self, title, description, user_id):
         self.title = title
         self.description = description
-        self.author_id = author_id
+        self.user_id = user_id
 
     def __repr__(self):
-        return '{}-{}'.format(self.title, self.author_id)
+        return '{}-{}'.format(self.title, self.user_id)
 
 class User(db.Model):
 
@@ -32,6 +32,8 @@ class User(db.Model):
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
+   # about_me = db.Column(db.String(160))
+   # last_online = db.Column(db.DateTime)
     posts = relationship("WallPost", backref="author")
 
     def __init__(self, name, email, password):
