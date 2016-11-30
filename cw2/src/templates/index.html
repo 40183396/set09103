@@ -4,6 +4,35 @@
       <br>
       <p>Click <a href="/logout">here</a> to logout.</p>
       <br><br>
+      <!--wall post form-->
+      <h2>Say Something</h2>
+      <br>
+      <form class="form-msg" role="form" method="post" action="/">
+        {{ form.csrf_token }}
+        <p>
+          {{ form.title(placeholder="title") }}
+          <span class="error">
+            {% if form.title.errors %}
+              {% for error in form.title.errors %}
+                {{ error }}
+              {% endfor %}
+            {% endif %}
+          </span>
+        </p>
+        <p>
+          {{ form.description(placeholder="description") }}
+          <span class="error">
+            {% if form.description.errors %}
+              {% for error in form.description.errors %}
+                {{ error }}
+              {% endfor %}
+            {% endif %}
+          </span>
+        </p>
+        <button class="btn btn sm btn-success" type="submit">Post to Wall</button>
+      </form>
+
+      <h2>WallPosts</h2>
       {% for post in posts %}
         <strong>Title:</strong> {{ post.title }} <br>
         <strong>Post:</strong> {{ post.description }} <br>

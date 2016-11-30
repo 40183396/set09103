@@ -5,7 +5,7 @@ from flask_login import (LoginManager, current_user, login_required, \
                           confirm_login, fresh_login_required)
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
-from form import LoginForm, RegisterForm
+from form import LoginForm, RegisterForm, WallPostsForm
 import bcrypt
 #import sqlite3
 #import sqlalchemy
@@ -22,12 +22,11 @@ app = Flask(__name__)
 app.config.from_object('config.DevelopmentConfig')
 db = SQLAlchemy(app)
 login_manager = LoginManager()
-#login_manager.init_app(app)
+login_manager.init_app(app)
 
 from models import *
-from form import LoginForm
 
-#login_manager.login_view = "user.login"
+login_manager.login_view = "user.login"
 
 valid_name = 'admin'
 valid_password = 'admin'
@@ -46,7 +45,7 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 @login_required
 def root():
     ##sqlie3 database queries
@@ -55,8 +54,21 @@ def root():
     #posts = [dict(title=row[0], description=row[1]) for row in cursor.fetchall()]
     #g.db.close()
     ##sqlAlchemy query is much easier
-    posts = db.session.query(WallPost).all()
-    return render_template("index.html", posts=posts)
+    error = None
+    form = WallPostsForm(request.form)
+    if form.validate_on_submit():
+        new_msg = WallPost(
+            form.title.data,
+            form.description.data,
+            current_user.id
+        )
+        db.session.add(new_msg)
+        db.session.commit()
+        flash('Posted to wall')
+        return redirect(url_for('root'))
+    else:
+        posts = db.session.query(WallPost).all()
+        return render_template("index.html", posts=posts, form=form, error=error)
 
 @app.route('/welcome')
 def welcome():
