@@ -23,11 +23,13 @@ app = Flask(__name__)
 app.config.from_object('config.DevelopmentConfig')
 db = SQLAlchemy(app)
 login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'login'
 login_manager.init_app(app)
 
 from models import *
 
-login_manager.login_view = "user.login"
+#login_manager.login_view = "users.login"
 
 valid_name = 'admin'
 valid_password = 'admin'
@@ -36,22 +38,22 @@ def check_auth(name, password):
         return True
     return False
 
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            flash('You must login')
-            return redirect(url_for('login'))
-    return wrap
+#def login_required(f):
+ #   @wraps(f)
+  #  def wrap(*args, **kwargs):
+   #     if 'logged_in' in session:
+    #        return f(*args, **kwargs)
+     #   else:
+      #      flash('You must login')
+       #     return redirect(url_for('login'))
+   # return wrap
 
-class Anonymous(AnonymousUserMixin):
-  def __init__(self):
-    self.username = 'Guest'
-    self.id = 0
+#class Anonymous(AnonymousUserMixin):
+ # def __init__(self):
+  ##  self.username = 'Guest'
+ #   self.id = 0
 
-login_manager.anonymous_user = Anonymous
+#login_manager.anonymous_user = Anonymous
 
 @app.route('/', methods=['GET', 'POST'])
 @login_required
@@ -63,7 +65,10 @@ def root():
     #g.db.close()
     ##sqlAlchemy query is much easier
     error = None
-    user = current_user.id
+    #user = User.query.filter_by(name=name).first()
+     #user = current_user.id
+    #if user == None:
+     # return redirect(url_for('login'))
     form = WallPostsForm(request.form)
     if form.validate_on_submit():
         new_msg = WallPost(
@@ -77,8 +82,7 @@ def root():
         return redirect(url_for('root'))
     else:
         posts = db.session.query(WallPost).all()
-        return render_template("index.html", posts=posts, form=form,
-        error=error, user=user)
+        return render_template("index.html", posts=posts, form=form, error=error)
 
 @app.route('/welcome')
 def welcome():
@@ -131,7 +135,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return redirect(url_for('index'))
+        return redirect(url_for('root'))
     return render_template('register.html', form = form)
 
 @app.route('/<name>')
