@@ -50,3 +50,4 @@ class User(db.Model):
         return unicode(self.id)
     def __repr__(self):
         return '<name - {}>'.format(self.name)
+

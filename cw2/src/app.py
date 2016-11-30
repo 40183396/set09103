@@ -3,13 +3,13 @@ from flask import Flask, render_template, request, \
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 
-#from flask.ext.bcrypt import Bcrypt
+#import bcrypt
 #import sqlite3
 #import sqlalchemy
 
 # creates app object
 app = Flask(__name__)
-#bcrypt = Bcrypt(app)
+#bcrypt = bcrypt(app)
 
 #app.secret_key = "-my-secret-key"
 #app.database = "sample.db"
@@ -21,6 +21,13 @@ db = SQLAlchemy(app)
 
 from models import *
 from form import LoginForm
+
+valid_name = 'admin'
+valid_password = 'admin'
+def check_auth(name, password):
+    if(name == valid_name and password == valid_password):
+        return True
+    return False
 
 def login_required(f):
     @wraps(f)
@@ -55,15 +62,16 @@ def login():
     if request.method == 'POST':
         if form.validate_on_submit():
           user = User.query.filter_by(name=request.form['username']).first()
-          if not user or not user.verify_password(password):
-           # if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-                error = 'Invalid username or password. Please try again'
-          else:
+          #if not user or not user.verify_password(password):
+          if check_auth(request.form['username'], request.form['password']):
                 session['logged_in'] = True
                 flash('You have successfully logged in!')
                 return redirect(url_for('root'))
+          else:
+                error = 'Invalid username or password. Please try again'
+
         else:
-            render_template('login.html', form=form, error=error)
+               render_template('login.html', form=form, error=error)
     return render_template('login.html', form=form, error=error)
 
 @app.route('/logout')
@@ -75,5 +83,19 @@ def logout():
 #def connect_db():
  #   return sqlite3.connect(app.database)
 
+@app.route('/user/<name>')
+@login_required
+def user(name):
+    user = User.query.filter_by(name=name).first()
+    if user == None:
+        flash('User %s is not in database.' % name)
+        return redirect(url_for('welcome'))
+    posts = [
+      {'author:': user, 'body': 'test post ~1'},
+      {'author:': user, 'body': 'test post #2'}
+    ]
+    return render_template('user.html',
+                          user=user,
+                          posts=posts)
 if __name__ == '__main__':
       app.run(host='0.0.0.0')

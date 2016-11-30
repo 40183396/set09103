@@ -8,9 +8,18 @@
   <body>
     
     <div class="container">
+       
+      <div>MohsBook:
+          <a href="{{ url_for('welcome') }}">Home</a>
+          {% if username.is_authenticated %}
+          | <a href="{{ url_for('user', name=user.name)}}">Your Profile</a>
+          | <a href="{{ url_for('logout') }}">Logout</a>
+          {% endif %}
+      </div>
 
-      <!-- child template -->
-      {% block content %}{% endblock %}
+      <!-- child template -->    
+      {% block content %}
+      {% endblock %}
 
       <!-- errors -->
       {% if error %}
