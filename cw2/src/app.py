@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, \
       redirect, url_for, session, flash, g
 from flask_login import (LoginManager, current_user, login_required, \
                           login_user, logout_user, UserMixin, \
-                          confirm_login, fresh_login_required)
+                          confirm_login, fresh_login_required, \
+                          AnonymousUserMixin)
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from form import LoginForm, RegisterForm, WallPostsForm
@@ -45,6 +46,13 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 
+class Anonymous(AnonymousUserMixin):
+  def __init__(self):
+    self.username = 'Guest'
+    self.id = 0
+
+login_manager.anonymous_user = Anonymous
+
 @app.route('/', methods=['GET', 'POST'])
 @login_required
 def root():
@@ -55,6 +63,7 @@ def root():
     #g.db.close()
     ##sqlAlchemy query is much easier
     error = None
+    user = current_user.id
     form = WallPostsForm(request.form)
     if form.validate_on_submit():
         new_msg = WallPost(
@@ -68,7 +77,8 @@ def root():
         return redirect(url_for('root'))
     else:
         posts = db.session.query(WallPost).all()
-        return render_template("index.html", posts=posts, form=form, error=error)
+        return render_template("index.html", posts=posts, form=form,
+        error=error, user=user)
 
 @app.route('/welcome')
 def welcome():
@@ -85,29 +95,27 @@ def login():
           if user is not None and request.form['password']==user.password:
           #bcrypt.hashpw(user.password.encode('utf-8'),valid_pwhash):
           #if check_auth(request.form['username'], request.form['password']):
-                session['logged_in'] = True
-               # login_user(user)
+                #session['logged_in'] = True
+                login_user(user)
                 flash('You have successfully logged in!')
                 return redirect(url_for('root'))
           else:
-                error = 'Invalid username or password. Please try again'
-
-        else:
-               render_template('login.html', form=form, error=error)
+                error = 'Invalid credentials. Please try again'
     return render_template('login.html', form=form, error=error)
 
 @app.route('/logout')
+@login_required
 def logout():
-   # logout_user()
-    session.pop('logged_in', None)
+    logout_user()
+   # session.pop('logged_in', None)
     flash('You logged out successfully')
     return redirect(url_for('welcome'))
 
 @login_manager.user_loader
-def load_user(id):
-   # return User.query.filter(User.id == int(user_id)).first()
-    u = User.query.get(id)
-    return Username(u.name, u.email, u.password)
+def load_user(user_id):
+   return User.query.filter(User.id == int(user_id)).first()
+   # u = User.query.get(id)
+   # return Username(u.name, u.email, u.password)
 #def connect_db():
  #   return sqlite3.connect(app.database)
 
@@ -122,11 +130,11 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
-        #login_user(user)
-        return redirect(url_for('welcome'))
+        login_user(user)
+        return redirect(url_for('index'))
     return render_template('register.html', form = form)
 
-@app.route('/user/<name>')
+@app.route('/<name>')
 @login_required
 def user(name):
     user = User.query.filter_by(name=name).first()
