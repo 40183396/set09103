@@ -1,13 +1,12 @@
 from app import db
-from models import WallPosts
+from models import WallPost
 
-#create database and tables
+#create the database and dbtables
 db.create_all()
 
-#insert
-db.session.add(WallPosts("Good", "I am feeling pretty good"))
-db.session.add(WallPosts("Hello", "Hello from the other side"))
+# insert
+db.session.add(WallPost("Good", "I am pretty darn good"))
+db.session.add(WallPost("Well", "I\'m pretty well actually"))
 
-#commit
+# commit
 db.session.commit()
-
