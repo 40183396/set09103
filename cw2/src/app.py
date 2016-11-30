@@ -5,7 +5,7 @@ from flask_login import (LoginManager, current_user, login_required, \
                           confirm_login, fresh_login_required)
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
-
+from form import LoginForm, RegisterForm
 import bcrypt
 #import sqlite3
 #import sqlalchemy
@@ -95,14 +95,14 @@ def logout():
 def load_user(id):
    # return User.query.filter(User.id == int(user_id)).first()
     u = User.query.get(id)
-    return Username(u.name, u.emai, u.password)
+    return Username(u.name, u.email, u.password)
 #def connect_db():
  #   return sqlite3.connect(app.database)
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
-    register_form = RegisterForm()
-    if register_form.vaildate_on_submit():
+    form = RegisterForm()
+    if form.validate_on_submit():
         user = User(
             name=form.username.data,
             email=form.email.data,
@@ -110,9 +110,9 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
-        login_user(user)
+        #login_user(user)
         return redirect(url_for('welcome'))
-    return render_template('register.html', form=form)
+    return render_template('register.html', form = form)
 
 @app.route('/user/<name>')
 @login_required
