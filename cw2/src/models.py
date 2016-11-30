@@ -1,4 +1,4 @@
-from app import db
+from app import db, bcrypt
 #from app import app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
@@ -36,7 +36,7 @@ class User(db.Model):
     def __init__(self, name, email, password):
         self.name = name
         self.email = email
-        self.password = password
+        self.password = bcrypt.generate_passwor_hash(password)
 
     def is_authenticated(self):
         return True

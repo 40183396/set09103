@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, \
       redirect, url_for, session, flash, g
+from flask_login import (LoginManager, current_user, login_required, \
+                          login_user, logout_user, UserMixin, \
+                          confirm_login, fresh_login_required)
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 
-#import bcrypt
+import bcrypt
 #import sqlite3
 #import sqlalchemy
 
@@ -18,6 +21,7 @@ app = Flask(__name__)
 # config
 app.config.from_object('config.DevelopmentConfig')
 db = SQLAlchemy(app)
+login_manager = LoginManager(app)
 
 from models import *
 from form import LoginForm
@@ -62,8 +66,8 @@ def login():
     if request.method == 'POST':
         if form.validate_on_submit():
           user = User.query.filter_by(name=request.form['username']).first()
-          #if not user or not user.verify_password(password):
-          if check_auth(request.form['username'], request.form['password']):
+          if user is not None and bcrypt.check_password_hash(user.password,request.form['password'] ):
+          #if check_auth(request.form['username'], request.form['password']):
                 session['logged_in'] = True
                 flash('You have successfully logged in!')
                 return redirect(url_for('root'))
@@ -80,6 +84,10 @@ def logout():
     flash('You logged out successfully')
     return redirect(url_for('welcome'))
 
+@login_manager.user_loader
+def load_user(id):
+    u = User.query.get(id)
+    return Username(u.name, u.emai, u.password)
 #def connect_db():
  #   return sqlite3.connect(app.database)
 
