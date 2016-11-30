@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 # config
 app.config.from_object('config.DevelopmentConfig')
-#db = SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 from models import *
 from form import LoginForm

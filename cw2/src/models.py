@@ -1,10 +1,10 @@
-#from app import db
-from app import app
+from app import db
+#from app import app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
-db=SQLAlchemy(app)
+#db=SQLAlchemy(app)
 
 class WallPost(db.Model):
 

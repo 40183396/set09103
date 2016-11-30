@@ -1,0 +1,88 @@
+<!--
+Copyright : (C) 2015 Sagemcom - URD2
+
+This software and source file is the property of Sagemcom
+and may not be copied or used without prior written consent.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"  class="no-js" lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="sagemcom" content="oui" />
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=no,user-scalable=0" />
+	<meta name="Description" content="The BT.com home page links to BT's products and services for customers at home or on the go, for small and medium businesses and for Corporate or public sector businesses in the UK or around the world" />
+    <meta name="Keywords" content="phones, telephones, mobiles, billing, BT shop, moving, home, fault, report, services, directory, business, broadband, account, networking, UK, international, customer" />
+	
+	<base href="" id="baseHref" />
+	
+	<script>
+		var initialRegex = /(.*)\/.*.html/i;
+		var baseHref = initialRegex.exec(window.location.pathname);
+		var usethis = window.location.pathname;
+		if (baseHref) {
+			usethis = baseHref[1] + '/';
+		}
+		document.getElementById("baseHref").href = usethis;
+		window.html5 = {
+		  'elements': 'qrcode' 
+		};
+	</script>
+	<link id="favicon" rel="shortcut icon" href="images/favicon.ico?v=1" />
+
+	<title>Smart Hub</title>
+	
+	<script src="js/vendor.js"></script>
+	
+	<script>
+		// fix for old code in gui-core relying on $.browser
+		if (typeof (jQuery) != 'undefined') {
+			jQuery.browser = {};
+			jQuery.browser.msie = false;
+			jQuery.browser.version = 0;
+			if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+				jQuery.browser.msie = true;
+				jQuery.browser.version = RegExp.$1;
+			}
+		} else {
+			jQuery = {};
+			jQuery.browser = {};
+			jQuery.browser.msie = true;
+			jQuery.browser.version = 8;
+		}
+		
+		$(function(){
+			var userAgent = navigator.userAgent.toLowerCase();
+			if(userAgent.indexOf("android") > -1) {
+			  	$('body').addClass('android');
+			} else if (userAgent.match(/(iPod|iPhone|iPad)/i)) {
+				$('body').addClass('ios');
+			}
+		});
+	</script>
+	
+	<script src="js/jquery-utils.js"></script>
+	<script src="js/gui-core.js"></script>
+	<script src="js/gui-api.js"></script>
+	<script src="js/gui-widgets.js"></script>
+
+	<script src="js/scripts.js"></script>
+
+	<script src="js/config.js"></script>
+	
+	<link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body ng-app="sboxApp">
+	<div id="accessibility-description" role="alert" aria-live="assertive" class="skip"></div>
+	<div id="main-ui-view" ui-view></div>
+	<div id="loginContainer" ng-if="!excludeLoginPopup" ng-include="'views/partials/login.html'"></div>
+	<img src="images/success.png" class="ng-hide">
+	<!-- ie 8 stuff -->
+	<!--[if lt IE 9]>
+	<script src="js/ie8libs.js"></script>
+	<![endif]-->
+	<!-- end ie8 stuff-->
+</body>
+
+</html>
