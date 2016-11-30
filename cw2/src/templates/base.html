@@ -9,13 +9,7 @@
     
     <div class="container">
        
-      <div>MohsBook:
-          <a href="{{ url_for('welcome') }}">Home</a>
-          {% if current_user.is_authenticated %}
-          | <a href="{{ url_for('user', name=user.name)}}">Your Profile</a>
-          | <a href="{{ url_for('logout') }}">Logout</a>
-          {% endif %}
-      </div>
+  
 
       <!-- child template -->    
       {% block content %}

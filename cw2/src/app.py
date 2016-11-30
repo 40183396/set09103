@@ -21,10 +21,13 @@ app = Flask(__name__)
 # config
 app.config.from_object('config.DevelopmentConfig')
 db = SQLAlchemy(app)
-login_manager = LoginManager(app)
+login_manager = LoginManager()
+#login_manager.init_app(app)
 
 from models import *
 from form import LoginForm
+
+#login_manager.login_view = "user.login"
 
 valid_name = 'admin'
 valid_password = 'admin'
@@ -66,9 +69,12 @@ def login():
     if request.method == 'POST':
         if form.validate_on_submit():
           user = User.query.filter_by(name=request.form['username']).first()
-          if user is not None and bcrypt.check_password_hash(user.password,request.form['password'] ):
+          valid_pwhash = bcrypt.hashpw(user.password, bcrypt.gensalt())
+          if user is not None and request.form['password']==user.password:
+          #bcrypt.hashpw(user.password.encode('utf-8'),valid_pwhash):
           #if check_auth(request.form['username'], request.form['password']):
                 session['logged_in'] = True
+               # login_user(user)
                 flash('You have successfully logged in!')
                 return redirect(url_for('root'))
           else:
@@ -80,12 +86,14 @@ def login():
 
 @app.route('/logout')
 def logout():
+   # logout_user()
     session.pop('logged_in', None)
     flash('You logged out successfully')
     return redirect(url_for('welcome'))
 
 @login_manager.user_loader
 def load_user(id):
+   # return User.query.filter(User.id == int(user_id)).first()
     u = User.query.get(id)
     return Username(u.name, u.emai, u.password)
 #def connect_db():
